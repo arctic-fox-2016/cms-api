@@ -1,21 +1,3 @@
-$(function() {
-    $('#login-form-link').click(function(e) {
-		$("#login-form").delay(100).fadeIn(100);
- 		$("#register-form").fadeOut(100);
-		$('#register-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
-	$('#register-form-link').click(function(e) {
-		$("#register-form").delay(100).fadeIn(100);
- 		$("#login-form").fadeOut(100);
-		$('#login-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
-});
-
-
 function cleanNotif(){
   $("#notification").removeClass()
   $("#notification").html("")
@@ -32,6 +14,8 @@ function clean(){
   cleanNotif()
 }
 
+
+
 function deleteBtn(){
   $(".btn-delete").each(function(){
     $(this).on("click", function(event){
@@ -39,7 +23,7 @@ function deleteBtn(){
       let letter = $(this).attr("data-letter");
       let freq = $(this).attr("data-freq");
       $.ajax({
-        url:`http://localhost:3000/API/letter/${btnId}`,
+        url:`http://localhost:3000/API/dates/${btnId}`,
         type: 'DELETE',
         success: function(result){
             loadData()
@@ -47,7 +31,7 @@ function deleteBtn(){
 
             // deletenotification
             $("#notification").show()
-            $("#notification").html(`Letter <b>${letter}</b> , Frequency <b>${freq}</b> is deleted`)
+            $("#notification").html(`Letter <b>${letter.substring(0,10)}</b> , Frequency <b>${freq}</b> is deleted`)
             $("#notification").removeClass();
             $("#notification").addClass( "alert alert-danger" );
 
@@ -65,7 +49,7 @@ function editBtn(){
       let letter = $(this).attr("data-letter");
       let freq = $(this).attr("data-freq");
 
-      $("#txt-letter-upd").val(letter);
+      $("#txt-letter-upd").val(letter.substring(0,10));
       $("#txt-freq-upd").val(freq);
       $("#panel-upd").show()
       $("#btn-update").attr("data-id",btnId);
@@ -77,7 +61,7 @@ function editBtn(){
 
 function loadData(){
   $.ajax({
-    url:'http://localhost:3000/API/letter',
+    url:'http://localhost:3000/API/dates',
     type: 'GET',
     success: function(result){
       let html=
@@ -95,7 +79,7 @@ function loadData(){
           html+=
           `<tr>
             <th scope="row">${parseInt(i)+1}</th>
-            <td>${result[i].letter}</td>
+            <td>${result[i].letter.substring(0,10)}</td>
             <td>${result[i].freq}</td>
             <td>
               <button type="button" class="btn btn-success btn-update" data-id="${result[i]._id}" data-letter="${result[i].letter}" data-freq="${result[i].freq}">
@@ -142,7 +126,7 @@ $(function(){
     }
     else{
       $.ajax({
-        url:'http://localhost:3000/API/letter',
+        url:'http://localhost:3000/API/dates',
         type: 'POST',
         data: {letter: letter, freq:freq},
         success: function(result){
@@ -158,110 +142,112 @@ $(function(){
     }
   })
 
-  $( "#txt-freq" ).keyup(function() {
-    let val = $(this).val()
-    let key = val.toUpperCase()
-    if(val=="")loadData()
-    else{
 
-      $.ajax({
-        url:`http://localhost:3000/API/searchletter2/${key}`,
-        type: 'GET',
-        success: function(result){
-          let html=
-            `<table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Letter</th>
-                  <th>Frequency</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>`
-            for(let i in result){
-              html+=
-              `<tr>
-                <th scope="row">${parseInt(i)+1}</th>
-                <td>${result[i].letter}</td>
-                <td>${result[i].freq}</td>
-                <td>
-                  <button type="button" class="btn btn-success btn-update" data-id="${result[i]._id}" data-letter="${result[i].letter}" data-freq="${result[i].freq}">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> update
-                  </button>
-                  <button type="button" class="btn btn-danger btn-delete" data-id="${result[i]._id}" data-letter="${result[i].letter}" data-freq="${result[i].freq}">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> delete
-                  </button>
-                </td>
-              </tr>`
-            }
-              html+=
-              `</tbody>
-            </table>`
+    $( "#txt-freq" ).keyup(function() {
+      let val = $(this).val()
+      let key = val.toUpperCase()
+      if(val=="")loadData()
+      else{
 
-          $("#content").html(html)
-          editBtn()
-          deleteBtn()
-        }
-      })
-    }
-  });
+        $.ajax({
+          url:`http://localhost:3000/API/searchdate2/${key}`,
+          type: 'GET',
+          success: function(result){
+            let html=
+              `<table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Letter</th>
+                    <th>Frequency</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>`
+              for(let i in result){
+                html+=
+                `<tr>
+                  <th scope="row">${parseInt(i)+1}</th>
+                  <td>${result[i].letter}</td>
+                  <td>${result[i].freq}</td>
+                  <td>
+                    <button type="button" class="btn btn-success btn-update" data-id="${result[i]._id}" data-letter="${result[i].letter}" data-freq="${result[i].freq}">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> update
+                    </button>
+                    <button type="button" class="btn btn-danger btn-delete" data-id="${result[i]._id}" data-letter="${result[i].letter}" data-freq="${result[i].freq}">
+                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> delete
+                    </button>
+                  </td>
+                </tr>`
+              }
+                html+=
+                `</tbody>
+              </table>`
 
-  $( "#txt-letter" ).keyup(function() {
-    let val = $(this).val()
-    let key = val.toUpperCase()
-    if(val=="")loadData()
-    else{
+            $("#content").html(html)
+            editBtn()
+            deleteBtn()
+          }
+        })
+      }
+    });
 
-      $.ajax({
-        url:`http://localhost:3000/API/searchletter/${key}`,
-        type: 'GET',
-        success: function(result){
-          let html=
-            `<table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Letter</th>
-                  <th>Frequency</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>`
-            for(let i in result){
-              html+=
-              `<tr>
-                <th scope="row">${parseInt(i)+1}</th>
-                <td>${result[i].letter}</td>
-                <td>${result[i].freq}</td>
-                <td>
-                  <button type="button" class="btn btn-success btn-update" data-id="${result[i]._id}" data-letter="${result[i].letter}" data-freq="${result[i].freq}">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> update
-                  </button>
-                  <button type="button" class="btn btn-danger btn-delete" data-id="${result[i]._id}" data-letter="${result[i].letter}" data-freq="${result[i].freq}">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> delete
-                  </button>
-                </td>
-              </tr>`
-            }
-              html+=
-              `</tbody>
-            </table>`
+    $( "#txt-letter" ).keyup(function() {
+      let val = $(this).val()
+      let key = val.toUpperCase()
+      if(val=="")loadData()
+      else{
 
-          $("#content").html(html)
-          editBtn()
-          deleteBtn()
-        }
-      })
-    }
-  });
+        $.ajax({
+          url:`http://localhost:3000/API/searchdate/${key}`,
+          type: 'GET',
+          success: function(result){
+            let html=
+              `<table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Letter</th>
+                    <th>Frequency</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>`
+              for(let i in result){
+                html+=
+                `<tr>
+                  <th scope="row">${parseInt(i)+1}</th>
+                  <td>${result[i].letter}</td>
+                  <td>${result[i].freq}</td>
+                  <td>
+                    <button type="button" class="btn btn-success btn-update" data-id="${result[i]._id}" data-letter="${result[i].letter}" data-freq="${result[i].freq}">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> update
+                    </button>
+                    <button type="button" class="btn btn-danger btn-delete" data-id="${result[i]._id}" data-letter="${result[i].letter}" data-freq="${result[i].freq}">
+                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> delete
+                    </button>
+                  </td>
+                </tr>`
+              }
+                html+=
+                `</tbody>
+              </table>`
+
+            $("#content").html(html)
+            editBtn()
+            deleteBtn()
+          }
+        })
+      }
+    });
+
 
   $("#btn-update").click(function(){
     let letter = $( "#txt-letter-upd" ).val();
     let freq = $( "#txt-freq-upd" ).val();
     let id = $(this).attr("data-id");
     $.ajax({
-      url:`http://localhost:3000/API/letter/${id}`,
+      url:`http://localhost:3000/API/dates/${id}`,
       type: 'PUT',
       data: {letter: letter.toUpperCase(), freq:freq.toUpperCase()},
       success: function(result){

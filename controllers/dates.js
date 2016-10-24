@@ -1,8 +1,6 @@
-// letter:String,
-// freq:Number,
-// dtCreated:Date
 
-var Letters = require('../models/letter')
+
+var Dates = require('../models/dates')
 
 module.exports = {
   insert: insert,
@@ -16,9 +14,10 @@ module.exports = {
   search3:search3
 }
 
+
 function search(req,res,next){
     console.log(req.params.key);
-    Letters.find({
+    Dates.find({
       letter:req.params.key
     },(err,result) => {
       console.log(result);
@@ -28,7 +27,7 @@ function search(req,res,next){
 
 function search2(req,res,next){
     console.log(req.params.key);
-    Letters.find({
+    Dates.find({
       freq:req.params.key
     },(err,result) => {
       console.log(result);
@@ -37,7 +36,7 @@ function search2(req,res,next){
 }
 
 function search3(req,res,next){
-    Letters.find({
+    Dates.find({
       freq:req.params.key,letter:req.params.key2
     },(err,result) => {
       console.log(result);
@@ -46,7 +45,7 @@ function search3(req,res,next){
 }
 
 function insert(req,res,next){
-    var items = new Letters({
+    var items = new Dates({
       letter:req.body.letter,
       freq:req.body.freq,
       dtCreated:new Date()
@@ -57,10 +56,7 @@ function insert(req,res,next){
 
 
 function update(req,res,next){
-  console.log(req.body.letter);
-  console.log(req.body.freq);
-  console.log(req.params.id);
-  Letters.findOne({
+  Dates.findOne({
     _id:req.params.id
   },(err,items) => {
       items.letter = req.body.letter
@@ -75,7 +71,7 @@ function update(req,res,next){
 }
 
 function deleteOne(req,res,next){
-  Letters.findOne({
+  Dates.findOne({
     _id:req.params.id
   },(err,items) => {
       if(err)throw err
@@ -88,19 +84,19 @@ function deleteOne(req,res,next){
 }
 
 function displayAll(req,res,next){
-    Letters.find({},(err,result) => {
+    Dates.find({},(err,result) => {
           res.json(result)
     })
 }
 
 function deleteAll(req,res,next){
-    Letters.find({},(err,result) => {
+    Dates.find({},(err,result) => {
           res.json(result)
     })
 }
 
 function detail(req,res,next){
-    Letters.findOne({
+    Dates.findOne({
       _id:req.params.id
     },(err,result) => {
           res.json(result)

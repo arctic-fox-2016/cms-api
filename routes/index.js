@@ -2,13 +2,19 @@
 module.exports = function(app, passport) {
 
     const letterController = require('../controllers/letter')
-    // Letter API
-    // insert: insert,
-    // displayAll: displayAll,
-    // update:update,
-    // deleteOne:deleteOne,
-    // detail:detail,
-    // deleteAll:deleteAll
+    const dateController = require('../controllers/dates')
+
+    app.get('/API/searchdate/:key', dateController.search)
+    app.get('/API/searchdate2/:key', dateController.search2)
+    app.post('/API/dates', dateController.insert)
+    app.get('/API/dates', dateController.displayAll)
+    app.put('/API/dates/:id', dateController.update)
+    app.delete('/API/dates/:id', dateController.deleteOne)
+    app.get('/API/dates/:id', dateController.detail)
+    app.delete('/API/dates/', dateController.deleteAll)
+
+    app.get('/API/searchletter/:key', letterController.search)
+    app.get('/API/searchletter2/:key', letterController.search2)
     app.post('/API/letter', letterController.insert)
     app.get('/API/letter', letterController.displayAll)
     app.put('/API/letter/:id', letterController.update)
@@ -96,6 +102,12 @@ module.exports = function(app, passport) {
         // render the page and pass in any flash data if it exists
         res.render('data.ejs');
     });
+
+    app.get('/dates', function(req, res) {
+        // render the page and pass in any flash data if it exists
+        res.render('dates.ejs');
+    });
+
 };
 
 // route middleware to make sure a user is logged in
