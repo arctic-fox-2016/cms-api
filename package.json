@@ -1,0 +1,29 @@
+{
+  "name": "cms-api",
+  "version": "1.0.0",
+  "description": "Landing Page: Line, Pie, Bar, Admin Panel '/' Register,Login, Logout: Login Tab(Email, Password) \"/login\", Register Tab(Email, Password, Confirm Password) \"/register\" Homepage after login: Welcome Email, cannot be accessed before login '/home' BREAD: \"/data\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arctic-fox-2016/cms-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arctic-fox-2016/cms-api/issues"
+  },
+  "homepage": "https://github.com/arctic-fox-2016/cms-api#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
+    "moment": "^2.15.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  }
+}
