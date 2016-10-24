@@ -14,8 +14,9 @@ $(function() {
 		$(this).addClass('active');
 		e.preventDefault();
 	});
-  
+
   $('#register-submit').click(function (e) {
+    e.preventDefault();
     console.log($('#email-register').val());
     $.ajax({
       type: 'POST',
@@ -29,23 +30,29 @@ $(function() {
     //     insert_to_tabel(item)
     //   })
     // })
-    e.preventDefault();
+    // e.preventDefault();
   })
 
   $('#login-submit').click(function (e) {
+    e.preventDefault();
     $.ajax({
       type: 'POST',
       url: '/login',
-      data: {email: $('#email').val(), password: $('#password').val()},
-      dataType: 'json'
+      data: {email: $('#email').val(), password: $('#password').val()}
+
     })
-    // .done(function(result){
-    //   console.log(result)
-    //   result.forEach(function(item){
-    //     insert_to_tabel(item)
-    //   })
-    // })
-    e.preventDefault();
+    .done(function(data,textstatus){
+      if (data.redirect) {
+           // data.redirect contains the string URL to redirect to
+           window.location.href = data.redirect;
+       }
+       else {
+           // data.form contains the HTML for the replacement form
+           console.log(textstatus);
+          //  $("#myform").replaceWith(data.form);
+       }
+    })
+
   })
 
 });

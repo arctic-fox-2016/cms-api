@@ -2,28 +2,49 @@ let express = require('express');
 let router = express.Router();
 let passport = require('passport')
 let User = require('../models/User')
+let helpers = require('../helper/index')
 /* GET home page. */
 
 router.get('/login', function(req, res, next){
   res.render('login', { title: 'Login Panel', message : req.flash('loginMessage')});
 });
 
-router.post('/login', passport.authenticate('local-login', {successRedirect : '/home', failureRedirect : '/login', failureFlash : true}));
+// router.post('/login', passport.authenticate('local-login', {successRedirect : '/home', failureRedirect : '/login', failureFlash : true}));
 
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'cmshacktiv8' });
 })
-router.get('/data', function(req, res, next) {
+router.get('/data',isLoggedIn, function(req, res, next) {
+  res = helpers(res);
   res.render('data', { title: 'Data Entry' });
 })
-router.get('/datadate', function(req, res, next) {
+router.get('/datadate',isLoggedIn, function(req, res, next) {
+  res = helpers(res);
   res.render('datadate', { title: 'Data Entry' });
 })
-router.get('/home',function(req, res, next) {
+router.get('/home',isLoggedIn, function(req, res, next) {
+  res = helpers(res);
   res.render('home', { title: 'Express' });
 })
 
+
+router.post('/login',function(req, res, next) {
+  passport.authenticate('local-login', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/login'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      'enter here on login with passport'
+      return res.json({redirect:'/home'})
+    });
+  })(req, res, next);
+});
+
+router.get('/logout',function(req, res) {
+  req.logout();
+  res.redirect('/login');
+})
 
 router.post('/register', function(req, res, next) {
 

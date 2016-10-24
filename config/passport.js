@@ -19,6 +19,7 @@ passport.deserializeUser(function(id, done) {
 
 // Sign in with Email and Password
 passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, password, done) {
+  console.log('uuuu go here actually');
   User.findOne({ email: email }, function(err, user) {
     if (!user) {
       return done(null, false, { msg: 'The email address ' + email + ' is not associated with any account. ' +

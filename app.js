@@ -17,6 +17,9 @@ let User = require('./models/User')
 let app = express();
 dotenv.load()
 // view engine setup
+
+require('./config/passport');
+
 mongoose.connect(process.env.MONGODB);
 mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
