@@ -12,7 +12,8 @@ let routes = require('./routes/index');
 let users = require('./routes/users');
 let mongoose = require('mongoose')
 var dotenv = require('dotenv');
-
+let LocalStrategy = require('passport-local').Strategy
+let User = require('./models/User')
 let app = express();
 dotenv.load()
 // view engine setup
@@ -72,7 +73,25 @@ app.use(function(err, req, res, next) {
     error: {}
   })
 })
-
+passport.use('local-login', new LocalStrategy({
+  usernameField : 'email', // by default, local strategy uses username and password, we will override with email
+  passwordField : 'password',
+  passReqToCallback : true // allows us to pass back the entire request to the callback
+}, function(req, email, password, done) {
+  console.log('enter passport');
+  User.findOne({ 'email' :  email }, function(err, user) {
+    if (err){
+      return done(err);
+    }
+    if (!user){
+      return done(null, false, req.flash('loginMessage', 'No user found.'));
+    }
+    if (!user.validPassword(password)){
+      return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+    }
+    return done(null, user);
+  })
+}))
 
 
 module.exports = app;

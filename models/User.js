@@ -53,24 +53,7 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-passport.use('local-login', new LocalStrategy({
-  email : 'email', // by default, local strategy uses username and password, we will override with email
-  password : 'password',
-  passReqToCallback : true // allows us to pass back the entire request to the callback
-}, function(req, email, password, done) {
-  User.findOne({ 'email' :  email }, function(err, user) {
-    if (err){
-      return done(err);
-    }
-    if (!user){
-      return done(null, false, req.flash('loginMessage', 'No user found.'));
-    }
-    if (!user.validPassword(password)){
-      return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
-    }
-    return done(null, user);
-  })
-}))
+
 let User = mongoose.model('User', userSchema);
 
 module.exports = User;

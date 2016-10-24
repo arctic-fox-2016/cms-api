@@ -14,7 +14,7 @@ $(function() {
 		$(this).addClass('active');
 		e.preventDefault();
 	});
-
+  
   $('#register-submit').click(function (e) {
     console.log($('#email-register').val());
     $.ajax({

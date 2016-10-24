@@ -12,20 +12,20 @@ router.post('/login', passport.authenticate('local-login', {successRedirect : '/
 
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'cmshacktiv8' });
 })
-
-router.get('/home',isLoggedIn, function(req, res, next) {
+router.get('/data', function(req, res, next) {
+  res.render('data', { title: 'Data Entry' });
+})
+router.get('/datadate', function(req, res, next) {
+  res.render('datadate', { title: 'Data Entry' });
+})
+router.get('/home',function(req, res, next) {
   res.render('home', { title: 'Express' });
 })
 
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Express' });
-})
 
 router.post('/register', function(req, res, next) {
-    console.log('enter register, email = ', req.body.email);
-    console.log('enter register, password = ', req.body.password);
 
     User.findOne({ email: req.body.email }, function(err, user) {
 
@@ -35,11 +35,11 @@ router.post('/register', function(req, res, next) {
         console.log('user already exist')
         return res.redirect('/login');
       }
-      user = new User({
-      });
-      user.email = req.body.email,
-      user.password = generateHash(req.body.password)
-      user.save(function(err) {
+    let newuser = new User({
+        email : req.body.email
+      })
+      newuser.password = newuser.generateHash(req.body.password)
+      newuser.save(function(err) {
         req.logIn(user, function(err) {
           console.log('ok');
           res.redirect('/home');
