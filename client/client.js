@@ -28,9 +28,8 @@ app.use(require('node-sass-middleware')({
     indentedSyntax: true,
     sourceMap: true
 }));
+
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 app.use(session({ secret: 'ivankerenbanget' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -42,7 +41,7 @@ require('./routes/routes.js')(app, passport); // load our routes and pass in our
 
 // view engine setup
 
-app.use('/', require('./routes'))
+app.use('/api', require('./routes/api'))
 
 app.listen(port);
 console.log('The magic happens on port ' + port);

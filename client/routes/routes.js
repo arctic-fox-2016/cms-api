@@ -5,7 +5,26 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         res.render('pages/index');
     });
+    app.get('/data', function(req, res) {
+        res.render('pages/data');
+    });
 
+    app.get('/datadate', function(req, res) {
+        res.render('pages/data-date');
+    });
+
+    app.get('/chart-bar', function(req, res) {
+        res.render('pages/chart_bar');
+    });
+
+    app.get('/chart-line', function(req, res) {
+        res.render('pages/chart_line');
+    });
+
+
+    app.get('/chart-pie', function(req, res) {
+        res.render('pages/chart_pie');
+    });
     var ar = []
     var getFB = function(token,callback){
       var req = require('request');
