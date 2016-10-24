@@ -45,13 +45,6 @@ require('./routes/routes.js')(app, passport); // load our routes and pass in our
 
 app.use('/api', require('./routes/api'))
 
-app.use(function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With");
-        res.header("Access-Control-Allow-Headers", "Content-Type");
-        res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
-        next();
-    });
 
 app.listen(port);
 console.log('The magic happens on port ' + port);
