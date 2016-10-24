@@ -8,6 +8,24 @@ module.exports = function(app, passport) {
     }); // load the index.ejs file
   });
 
+  app.get('/line', function(req, res) {
+    res.render('chart_line.ejs', {
+      title: "Chart Line"
+    });
+  });
+
+  app.get('/pie', function(req, res) {
+    res.render('chart_pie.ejs', {
+      title: "Chart Pie"
+    });
+  });
+
+  app.get('/bar', function(req, res) {
+    res.render('chart_bar.ejs', {
+      title: "Chart Bar"
+    });
+  });
+
   app.get('/login', function(req, res) {
     res.render('login_register', {
       title: 'Login',
@@ -65,7 +83,7 @@ module.exports = function(app, passport) {
   // API ==============================
   // =====================================
 
-  app.get('/api/data', isLoggedIn, data.findAll)
+  app.get('/api/data', data.findAll)
   app.get('/api/data/:id', isLoggedIn, data.findOne)
   app.post('/api/data', isLoggedIn, data.createOne)
   app.put('/api/data/:id', isLoggedIn, data.updateOne)
