@@ -8,8 +8,8 @@ router.get('/', function(req, res, next) {
     res.render('pages/home')
 })
 
-router.get('/items', function(req, res, next) {
-    res.render('pages/items')
+router.get('/register', function(req, res, next) {
+    res.render('pages/register')
 })
 
 module.exports = router
