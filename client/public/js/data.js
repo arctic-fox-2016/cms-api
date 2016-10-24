@@ -168,7 +168,7 @@ let searchData = function(query) {
 
 let refreshAllData = function() {
     $.ajax({
-        url: 'http://52.77.140.25:9000/api/data',
+        url: 'http://localhost:9000/api/data',
         type: "GET",
         success: function(result) {
             let allData = ""
