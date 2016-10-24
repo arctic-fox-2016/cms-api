@@ -28,6 +28,7 @@ function clean(){
   $("#txt-freq").val("")
   $("#txt-letter").val("")
   $("#panel-upd").hide()
+  $("#panel-add").hide()
   cleanNotif()
 }
 
@@ -117,13 +118,19 @@ function loadData(){
 }
 
 $(function(){
+  $("#panel-add").hide()
   $("#panel-upd").hide()
   $("#notification").hide()
   loadData()
 
   $("#btn-add").click(function(){
-    let val = $( "#txt-letter" ).val();
-    let freq = $( "#txt-freq" ).val();
+    cleanNotif()
+    $("#panel-add").show()
+  })
+
+  $("#btn-add-save").click(function(){
+    let val = $( "#txt-letter-add" ).val();
+    let freq = $( "#txt-freq-add" ).val();
     let letter = val.toUpperCase()
     if(val=="" || freq==""){
       // requirednotification
@@ -163,7 +170,7 @@ $(function(){
           clean()
           // updatenotification
           $("#notification").show()
-          $("#notification").html(`data is updated to Letter <b>${letter.toUpperCase()}</b> , Frequency <b>${freq}</b>`)
+          $("#notification").html(`Data is updated to Letter <b>${letter.toUpperCase()}</b> , Frequency <b>${freq}</b>`)
           $("#notification").removeClass();
           $("#notification").addClass( "alert alert-warning" );
 
