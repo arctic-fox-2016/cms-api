@@ -4,13 +4,28 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
+  <br>
   <div class="container">
-  <div id="message"><%= message %></div>
-  Login <a href="/register">Register</a><br>
+  <div id="message" class="alert alert-info"><%= message %></div>
+  <ul class="nav nav-pills">
+    <li role="presentation" class="active"><a href="#">Login</a></li>
+    <li role="presentation"><a href="/register">Register</a></li>
+  </ul>
+
   <form action="/api/login" method="POST">
-    <input type="text" placeholder="Email" name="email"><br>
-    <input type="password" placeholder="Password" name="password"><br>
-    <input type="submit" value="LOG IN">
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Email</span>
+      <input type="text" class="form-control" name="email" placeholder="Email" aria-describedby="basic-addon1">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Password</span>
+      <input type="password" class="form-control" name="password" placeholder="Password" aria-describedby="basic-addon1">
+    </div>
+    <br>
+
+    <input type="submit" value="LOG IN" class="btn btn-default">
   </form>
   </div>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

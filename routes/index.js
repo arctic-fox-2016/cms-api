@@ -34,4 +34,20 @@ router.get('/data', function(req,res,next){
   res.render('data.ejs')
 })
 
+router.get('/datadate', function(req,res,next){
+  res.render('data-date.ejs')
+})
+
+router.get('/bar', function(req,res,next){
+  res.render('bar.ejs')
+})
+
+router.get('/line', function(req,res,next){
+  res.render('line.ejs')
+})
+
+router.get('/pie', function(req,res,next){
+  res.render('pie.ejs')
+})
+
 module.exports = router

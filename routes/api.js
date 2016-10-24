@@ -4,6 +4,7 @@ let router = express.Router()
 let helper = require('../controller/helper.js')
 let Users = require('../models/users.js')
 let Data = require('../models/data.js')
+let Datadate = require('../models/datadate.js')
 let passport = require('passport')
 let LocalStrategy = require('passport-local').Strategy
 
@@ -144,6 +145,87 @@ router.get('/search', function(req,res,next){
     })
   } else {
     Data.find({letter: req.query.letter, frequency: req.query.frequency}, function(err,result){
+      if(err){
+        res.json({message:"errorii", detail:err})
+      } else {
+        res.json(result)
+      }
+    })
+  }
+})
+
+router.post('/datadate', function(req,res,next){
+  let newdata = new Datadate({letter: req.body.letter, frequency: req.body.frequency}).save(function(err, result){
+    if(err){
+      res.json({message: "error", detail: err})
+    } else {
+      res.json({message: "Add is Successful", detai: result})
+    }
+  })
+})
+
+router.put('/datadate/:id', function(req,res,next){
+  console.log(req.params.id)
+  Datadate.update({_id: req.params.id},{letter: req.body.letter, frequency: req.body.frequency}, function(err, result){
+    if(err){
+      res.json({message: "error", detail: err})
+    } else {
+      res.json({message: "Add is Successful", detail: result})
+    }
+  })
+})
+
+router.delete('/datadate/:id', function(req,res,next){
+  Datadate.remove({_id: req.params.id}, function(err, result){
+    if(err){
+      res.json({message: "error", detail: err})
+    } else {
+      res.json({message: "Delete is Successful", detail: result})
+    }
+  })
+})
+
+router.get('/datadate', function(req,res,next){
+  Datadate.find({}, function(err,result){
+    if(err){
+      res.json({message:"error", detail:err})
+    } else {
+      res.json(result)
+    }
+  })
+})
+
+router.get('/datadate/:id', function(req,res,next){
+  console.log(req.params.id)
+  Datadate.findOne({_id: req.params.id}, function(err,result){
+    if(err){
+      res.json({message:"error", detail:err})
+    } else {
+      res.json(result)
+    }
+  })
+})
+
+router.get('/search/datadate', function(req,res,next){
+  if(req.query.letter == ""){
+    Datadate.find({frequency: req.query.frequency}, function(err,result){
+      console.log('letter null', result)
+      if(err){
+        res.json({message:"errorii", detail:err})
+      } else {
+        res.json(result)
+      }
+    })
+  } else if (req.query.frequency == ""){
+    Datadate.find({letter: req.query.letter}, function(err,result){
+      if(err){
+        res.json({message:"errorii", detail:err})
+      } else {
+        res.json(result)
+      }
+    })
+  } else {
+    Datadate.find({letter: req.query.letter, frequency: req.query.frequency}, function(err,result){
       if(err){
         res.json({message:"errorii", detail:err})
       } else {

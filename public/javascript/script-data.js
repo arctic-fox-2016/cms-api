@@ -1,8 +1,8 @@
 let convertJSONtoHTML = function(result){
-  let data = "<table><tr><th>#</th><th>Letter</th><th>Frequency</th><th>Action</th></tr>"
+  let data = "<table class='table table-striped'><tr><th>#</th><th>Letter</th><th>Frequency</th><th>Action</th></tr>"
   console.log(result)
   for (let i in result){
-    data = data + `<tr><td>${parseInt(i)+1}</td><td>${result[i].letter}</td><td>${result[i].frequency}</td><td><button data_id="${result[i]._id}" class="update-button">Update</button><button data_id="${result[i]._id}" class= "delete-button">Delete</button></td></tr>`
+    data = data + `<tr><td>${parseInt(i)+1}</td><td>${result[i].letter}</td><td>${result[i].frequency}</td><td><button data_id="${result[i]._id}" class="update-button btn btn-success">Update</button> <button data_id="${result[i]._id}" class= "delete-button btn btn-danger">Delete</button></td></tr>`
   }
   data = data + "</table>"
   $("#data").html(data)
@@ -12,6 +12,7 @@ let convertJSONtoHTML = function(result){
       url: `/api/data/${$(this).attr("data_id")}`,
       method:'GET',
       success: function(result){
+        $("#add-update-data").show()
         console.log(result)
         $("input[name='letter']").val(result.letter)
         $("input[name='frequency']").val(result.frequency)
@@ -45,11 +46,13 @@ let loadData = function(){
 $(document).ready(function(){
   console.log('the page is ready')
   loadData()
+
   $("#add-update-data").hide()
 
   $("#add-update-data").submit(function(event){
-    event.preventDefault()
-    if($("input[name='object_id']").val()=="null"){
+    event.preventDefault($("input[name='object_id']").val())
+    console.log()
+    if($("input[name='object_id']").val()==""){
       $.ajax({
         url: '/api/data',
         method: 'POST',

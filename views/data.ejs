@@ -5,46 +5,44 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
+  <br>
   <div class="container">
     <ul class="nav nav-pills">
-      <li role="presentation" class="active"><a href="#">Home</a></li>
-      <li role="presentation"><a href="#">Data</a></li>
-      <li role="presentation"><a href="#">Data Date</a></li>
+      <li role="presentation"><a href="/home">Home</a></li>
+      <li role="presentation" class="active"><a href="#">Data</a></li>
+      <li role="presentation"><a href="/datadate">Data Date</a></li>
     </ul>
     <br>
-    <div id="message"></div>
-    <button id="show-add-button" class="btn btn-success">Add +</button>
+    <div id="message" class="alert alert-info"></div>
+    <button id="show-add-button" class="btn btn-success">Add +</button><br>
 
     <form action="/api/data" method="POST" id="add-update-data">
+      <br>
       <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">@</span>
-        <input type="text" class="form-control" name="letter"placeholder="Username" aria-describedby="basic-addon1">
+        <span class="input-group-addon" id="basic-addon1">Letter</span>
+        <input type="text" class="form-control" name="letter" placeholder="Letter" aria-describedby="basic-addon1">
       </div>
 
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
-        <span class="input-group-addon" id="basic-addon2">@example.com</span>
+        <span class="input-group-addon" id="basic-addon1">Frequency</span>
+        <input type="text" class="form-control" name="frequency" placeholder="Frequency" aria-describedby="basic-addon1">
       </div>
 
-      <div class="input-group">
-        <span class="input-group-addon">$</span>
-        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-        <span class="input-group-addon">.00</span>
-      </div>
-
-      <label for="basic-url">Your vanity URL</label>
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon3">https://example.com/users/</span>
-        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-      </div>
-
-      <input name="object_id" type ="hidden">
-      Letter: <input type="text" name="letter"><br>
-      Frequency: <input type="number" name="frequency"><br>
-      <input type="submit" value="Save">
+      <input name="object_id" type ="hidden" val=""><br>
+      <input type="submit" value="Save" class="btn btn-default">
     </form><br>
-    Search<br>
-    Letter <input type="text" id="search-box-letter"> Frequency <input type="text" id="search-box-frequency">
+
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only" for="exampleInputEmail3">Letter</label>
+        <input id="search-box-letter" type="text" class="form-control" placeholder="Letter">
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="exampleInputPassword3">Password</label>
+        <input type="text" class="form-control" id="search-box-frequency" placeholder="Password">
+      </div>
+    </form>
+      <br>
     <div id="data"></div>
   </div>
   <!-- Latest compiled and minified JavaScript -->
