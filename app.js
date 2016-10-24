@@ -4,11 +4,31 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var flash = require('connect-flash');
+var session = require('express-session');
+var configDB = require('./config/database.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+// database setup
+mongoose.connect(configDB.url);
+
+// pass passport for configuration
+require('./config/passport')(passport);
+
+// required for passport
+app.use(session({
+    secret: 'ivangerardmagic'
+})); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +42,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+// routes ======================================================================
+require('./routes/index.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
