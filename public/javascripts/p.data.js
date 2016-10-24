@@ -4,7 +4,7 @@ function initContent(){
   $.get({
     url: 'http://localhost:9000/api/data',
     data: {
-      'letter': $('#txt-search-letter').val().trim(),
+      'letter': _.toUpper($('#txt-search-letter').val().trim()),
       'frequency': $('#txt-search-frequency').val().trim()
     }, success: function(result){
       listContent.empty()
@@ -73,7 +73,7 @@ function initManage(){
       $.post({
         url: 'http://localhost:9000/api/data',
         data: {
-          'letter': manageLetter.val().trim(),
+          'letter': _.toUpper(manageLetter.val().trim()),
           'frequency': manageFrequency.val().trim()
         }, success: function(result){
           manageLetter.val('').removeAttr('disabled')
@@ -87,7 +87,7 @@ function initManage(){
         url: `http://localhost:9000/api/data/${manageId.val().trim()}`,
         method: 'PUT',
         data: {
-          'letter': manageLetter.val().trim(),
+          'letter': _.toUpper(manageLetter.val().trim()),
           'frequency': manageFrequency.val().trim()
         }, success: function(result){
           manageLetter.val('').removeAttr('disabled')

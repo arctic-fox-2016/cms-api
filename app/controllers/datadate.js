@@ -11,15 +11,16 @@ module.exports = {
 
 function createOne(req, res, next){
   models.findOne({
-    username:req.body.username
+    date:req.body.date,
+    frequency:req.body.frequency
   },(err, record) => {
     if(err) throw err
     if(!_.isEmpty(record)){
-      res.status(400).json({error:"Username already exists"})
+      res.status(400).json({error:"Letter already exists"})
     } else {
       var record = new models({
-        username:req.body.username,
-        password:req.body.password
+        date:req.body.date,
+        frequency:req.body.frequency
       })
       record.save()
       res.status(200).json(record)
@@ -28,7 +29,33 @@ function createOne(req, res, next){
 }
 
 function findAll(req, res, next){
-  models.find({},(err, record) => {
+  var query = null
+  if(!_.isEmpty(req.query.date) && !_.isEmpty(req.query.frequency)){
+    query = {
+      $and : [
+        {
+          date: { $in: req.query.date }
+        },
+        {
+          frequency: { $in: req.query.frequency }
+        }
+      ]
+    }
+  } else if(!_.isEmpty(req.query.date)){
+    query = {
+      date: {
+        $in: req.query.date
+      }
+    }
+  } else if(!_.isEmpty(req.query.frequency)){
+    query = {
+      frequency: {
+        $in: req.query.frequency
+      }
+    }
+  }
+
+  models.find(query,(err, record) => {
     if(err) throw err
     if(!_.isEmpty(record)){
       res.status(200).json(record)
@@ -57,7 +84,8 @@ function updateOne(req, res, next){
   },(err, record) => {
     if(err) throw err
     if(record){
-      record.password = req.body.password
+      record.date = req.body.date
+      record.frequency = req.body.frequency
       record.save((err)=> {
         if(err) throw err
         res.status(200).json(record)

@@ -65,13 +65,13 @@ module.exports = function(app, passport) {
   // API ==============================
   // =====================================
 
-  app.get('/api/data', data.findAll)
+  app.get('/api/data', isLoggedIn, data.findAll)
   app.get('/api/data/:id', isLoggedIn, data.findOne)
   app.post('/api/data', isLoggedIn, data.createOne)
   app.put('/api/data/:id', isLoggedIn, data.updateOne)
   app.delete('/api/data/:id', isLoggedIn, data.deleteOne)
 
-  app.get('/api/datadate', isLoggedIn, datadate.findAll)
+  app.get('/api/datadate', datadate.findAll)
   app.get('/api/datadate/:id', isLoggedIn, datadate.findOne)
   app.post('/api/datadate', isLoggedIn, datadate.createOne)
   app.put('/api/datadate/:id', isLoggedIn, datadate.updateOne)
