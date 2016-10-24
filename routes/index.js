@@ -1,6 +1,21 @@
 // app/routes.js
 module.exports = function(app, passport) {
 
+    const letterController = require('../controllers/letter')
+    // Letter API
+    // insert: insert,
+    // displayAll: displayAll,
+    // update:update,
+    // deleteOne:deleteOne,
+    // detail:detail,
+    // deleteAll:deleteAll
+    app.post('/API/letter', letterController.insert)
+    app.get('/API/letter', letterController.displayAll)
+    app.put('/API/letter/:id', letterController.update)
+    app.delete('/API/letter/:id', letterController.deleteOne)
+    app.get('/API/letter/:id', letterController.detail)
+    app.delete('/API/letter/', letterController.deleteAll)
+
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
@@ -8,8 +23,9 @@ module.exports = function(app, passport) {
         res.render('index.ejs');
     });
 
-    app.get('/dashboard', isLoggedIn, function(req, res) {
-        res.render('dashboard.ejs', {
+    app.get('/home', isLoggedIn, function(req, res) {
+        res.render('home.ejs', {
+            email:req.user.local.email,
             user: req.user
         });
     });
@@ -24,7 +40,7 @@ module.exports = function(app, passport) {
         });
     });
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/dashboard', // redirect to the secure profile section
+        successRedirect: '/home', // redirect to the secure profile section
         failureRedirect: '/login', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
@@ -73,6 +89,12 @@ module.exports = function(app, passport) {
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
+    });
+
+    // DATA
+    app.get('/data', function(req, res) {
+        // render the page and pass in any flash data if it exists
+        res.render('data.ejs');
     });
 };
 
