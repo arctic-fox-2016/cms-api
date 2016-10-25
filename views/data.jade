@@ -3,7 +3,7 @@ extends layout
 block content
   include navbar
   .container
-    button.btn.btn-primary
+    button.btn.btn-primary#btnadd
       span.glyphicon.glyphicon-plus
       b Add
     .jumbotron#addform
@@ -18,7 +18,7 @@ block content
           &nbsp;
           input#frequency.form-control(type='number', placeholder='0.0000', name='frequency')
         &nbsp;
-        button.btn.btn-default(type='submit') Save
+        button#btnsave.btn.btn-default(type='submit') Save
     .row
       h3 Search
       hr
@@ -31,9 +31,7 @@ block content
         .form-group
           label(for='frequencysearch') Frequency
           &nbsp;
-          input#frequency.form-control(type='number', placeholder='0.0000', name='frequency')
-        &nbsp;
-        button.btn.btn-default(type='submit') Save
+          input#frequencysearch.form-control(type='number', placeholder='0.0000', name='frequency')
     .row
       table.table
         caption Optional table caption.
@@ -43,7 +41,7 @@ block content
             th Letter
             th Frequency
             th Action
-        tbody
+        tbody#datatable
           tr
             th(scope='row') 1
             td B
@@ -56,3 +54,4 @@ block content
               button.btn.btn-danger
                 span.glyphicon.glyphicon-trash
                 b Delete
+  script(type='text/javascript', src='/javascripts/data.js')

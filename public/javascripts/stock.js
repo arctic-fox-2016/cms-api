@@ -1,6 +1,6 @@
 var id_edit
 function insert_to_tabel(item) {
-    var row = $('<tr></tr>').attr({ id: item._id}).prependTo($('#stock_table'))
+    var row = $('<tr></tr>').attr({ id: item._id}).prependTo($('#datatable'))
     var tdphoto = $('<td></td>')
     var photo = $('<img>').attr({src:'/images/'+item.photo+'.jpg'}).appendTo(tdphoto)
     tdphoto.appendTo(row)

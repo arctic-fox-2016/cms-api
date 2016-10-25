@@ -6,7 +6,20 @@ block content
     button.btn.btn-primary
       span.glyphicon.glyphicon-plus
       b Add
-
+    
+    .jumbotron#addform
+      form.form-inline
+        .form-group
+          label(for='letter') Letter
+          &nbsp;
+          input#letter.form-control(type='text', placeholder='A', name='letter')
+        &nbsp;
+        .form-group
+          label(for='frequency') Frequency
+          &nbsp;
+          input#frequency.form-control(type='number', placeholder='0.0000', name='frequency')
+        &nbsp;
+        button#btnsave.btn.btn-default(type='submit') Save
     .row
       h3 Search
       hr
@@ -14,14 +27,13 @@ block content
         .form-group
           label(for='exampleInputName2') Letter
           &nbsp;
-          input#letter.form-control(type='date', placeholder='A', name='letter')
+          input#lettersearch.form-control(type='text', placeholder='A', name='letter')
         &nbsp;
         .form-group
           label(for='exampleInputEmail2') Frequency
           &nbsp;
-          input#frequency.form-control(type='number', placeholder='0.0000', name='frequency')
-        &nbsp;
-        button.btn.btn-default(type='submit') Save
+          input#frequencysearch.form-control(type='number', placeholder='0.0000', name='frequency')
+
     .row
       table.table
         caption Optional table caption.
@@ -44,3 +56,4 @@ block content
               button.btn.btn-danger
                 span.glyphicon.glyphicon-trash
                 b Delete
+  script(type='text/javascript', src='/javascripts/validation.js')

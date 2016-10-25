@@ -10,6 +10,7 @@ let flash    = require('connect-flash');
 let session = require('express-session')
 let routes = require('./routes/index');
 let users = require('./routes/users');
+let api = require('./routes/api');
 let mongoose = require('mongoose')
 var dotenv = require('dotenv');
 let LocalStrategy = require('passport-local').Strategy
@@ -45,6 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
