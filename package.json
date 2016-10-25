@@ -1,0 +1,24 @@
+{
+  "name": "cms-api",
+  "version": "0.1.0",
+  "description": "Learn CMS API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arctic-fox-2016/cms-api.git"
+  },
+  "keywords": [
+    "CMS",
+    "Express",
+    "Bootstrap"
+  ],
+  "author": "Ivan Gerard <me@ivangerard.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arctic-fox-2016/cms-api/issues"
+  },
+  "homepage": "https://github.com/arctic-fox-2016/cms-api#readme"
+}
