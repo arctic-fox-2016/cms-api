@@ -11,7 +11,7 @@ $(function() {
         let dataId = $("#hidden-data-id").val()
         if (!dataId)
             $.ajax({
-                url: 'http://localhost:9000/api/datadate',
+                url: '/api/datadate',
                 type: 'POST',
                 data: {
                     date: $("#date").val(),
@@ -28,7 +28,7 @@ $(function() {
             })
         else {
             $.ajax({
-                url: 'http://localhost:9000/api/datadate/' + dataId,
+                url: '/api/datadate/' + dataId,
                 type: 'PUT',
                 data: {
                     letter: $("#letter").val().toUpperCase(),
@@ -127,7 +127,7 @@ $(function() {
 function getDetails(id) {
     console.log(id)
     $.ajax({
-        url: 'http://localhost:9000/api/datadate/' + id,
+        url: '/api/datadate/' + id,
         type: 'GET',
         success: function(result) {
             $("#letter").val(result.letter)
@@ -139,7 +139,7 @@ function getDetails(id) {
 
 let searchData = function(query) {
     $.ajax({
-        url: `http://localhost:9000/api/search/${query}`,
+        url: `/api/search/${query}`,
         type: "GET",
         success: function(result) {
             console.log(result);
@@ -167,7 +167,7 @@ let searchData = function(query) {
 
 let refreshAllData = function() {
     $.ajax({
-        url: 'http://localhost:9000/api/datadate',
+        url: '/api/datadate',
         type: "GET",
         success: function(result) {
             let allData = ""
@@ -216,7 +216,7 @@ function updateData(id) {
 
 
     $.ajax({
-        url: 'http://localhost:9000/api/datadate/' + id,
+        url: '/api/datadate/' + id,
         type: 'PUT',
         data: {
             letter: $("#letter").val(),

@@ -44,7 +44,7 @@
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  $.getJSON( "http://localhost:9000/api/datadate", function(data) {
+  $.getJSON( "/api/datadate", function(data) {
     console.log(data)
     x.domain(d3.extent(data, function(d) { return parseTime(d.letter); }));
     y.domain(d3.extent(data, function(d) { return d.frequency; }));

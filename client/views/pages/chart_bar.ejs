@@ -61,7 +61,7 @@
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-      $.getJSON( "http://localhost:9000/api/data", function(data) {
+      $.getJSON( "/api/data", function(data) {
         console.log(data);
         x.domain(data.map(function(d) { return d.letter; }));
         y.domain([0, d3.max(data, function(d) { return d.frequency; })]);

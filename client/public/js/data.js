@@ -12,7 +12,7 @@ $(function() {
         let dataId = $("#hidden-data-id").val()
         if (!dataId)
             $.ajax({
-                url: 'http://localhost:9000/api/data',
+                url: '/api/data',
                 type: 'POST',
                 data: {
                     letter: $("#letter").val().toUpperCase(),
@@ -29,7 +29,7 @@ $(function() {
             })
         else {
             $.ajax({
-                url: 'http://localhost:9000/api/data/' + dataId,
+                url: '/api/data/' + dataId,
                 type: 'PUT',
                 data: {
                     letter: $("#letter").val().toUpperCase(),
@@ -128,7 +128,7 @@ $(function() {
 function getDetails(id) {
     console.log(id)
     $.ajax({
-        url: 'http://localhost:9000/api/data/' + id,
+        url: '/api/data/' + id,
         type: 'GET',
         success: function(result) {
             $("#letter").val(result.letter)
@@ -140,7 +140,7 @@ function getDetails(id) {
 
 let searchData = function(query) {
     $.ajax({
-        url: `http://localhost:9000/api/search/${query}`,
+        url: `/api/search/${query}`,
         type: "GET",
         success: function(result) {
             console.log(result);
@@ -168,7 +168,7 @@ let searchData = function(query) {
 
 let refreshAllData = function() {
     $.ajax({
-        url: 'http://localhost:9000/api/data',
+        url: '/api/data',
         type: "GET",
         success: function(result) {
             let allData = ""
@@ -199,7 +199,7 @@ let refreshAllData = function() {
             $("#all-data .btn-dlt").click(function() {
                 let idData = $(this).attr('data-id')
                 $.ajax({
-                    url: 'http://localhost:9000/api/data/' + idData,
+                    url: '/api/data/' + idData,
                     type: 'DELETE',
                     success: function(result) {
                         $("#message").show().html("Delete is successful")
