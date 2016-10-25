@@ -1,0 +1,49 @@
+body {
+	background: #F5F5F5;
+	font-family: 'Lato', sans-serif;
+}
+
+.main .panel {
+	margin-top: 50px;
+}
+
+.form .well {
+	margin-top: 50px;
+	padding: 30px;
+	background: white;
+}
+
+.well {
+	word-wrap: break-word;
+	background: white;
+	padding: 10px;
+}
+
+a{
+	color: #B5BBC0;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #464848;
+}
+
+.form form {
+	margin: 20px 0; 
+}
+
+form {
+	padding: 20px;
+}
+
+.btn {
+	border-radius: 0px;
+}
+
+.alert {
+	margin-top: 20px;
+}
+
+#home {
+	margin-top: 50px;
+}

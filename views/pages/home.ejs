@@ -1,0 +1,150 @@
+<div id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="well text-center">
+                    <h2><span class="fa fa-cog fa-spin fa-fw"></span>Your Profile</h2>
+                    <% if (message.length > 0) { %>
+                        <div class="alert alert-success">
+                            <%= message %>
+                        </div>
+                        <% } %>
+                            <br>
+                            <span class="fa fa-user"></span> Id
+                            <br>
+                            <br>
+                            <div class="well">
+                                <%= user._id %>
+                            </div>
+                            <span class="fa fa-envelope"></span> Email
+                            <br>
+                            <br>
+                            <div class="well">
+                                <%= user.email %>
+                            </div>
+                            <span class="fa fa-lock"></span> Password
+                            <br>
+                            <br>
+                            <div class="well">
+                                <%= user.password %>
+                            </div>
+                            <div><a href="/logout" class="btn btn-default btn-sm">Logout</a></div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <!-- Add Data -->
+                <div class="col-md-12">
+                    <div class="panel panel-info">
+                        <!-- Default panel -->
+                        <div class="panel-heading">Data</div>
+                        <div class="panel-body text-center">
+                        <form>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="search-data-letter" placeholder="Search letter">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="search-data-frequency" placeholder="Search frequency">
+                                </div>
+                            </div>
+                        </form>
+                            <div class="clearfix">
+                                <button onclick="showAddData()" class="btn btn-md btn-info pull-right"><span class="fa fa-plus"></span> Add data</button>
+                            </div>
+                            <!-- Message -->
+                            <div id="data-message">
+                                
+                            </div>
+                            <!-- Hidden Form -->
+                            <div id="add-data">
+                                <hr>
+                                <form action="">
+                                    <div class="row">
+                                        <div class="form-group col-md-5">
+                                            <input type="input" placeholder="Enter letter" name="data-letter" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <input type="input" placeholder="Enter frequency" name="data-frequency" class="form-control">
+                                        </div>
+                                        <button id="add-data-button" onclick="addData()" class="btn btn-info col-md-2">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Table -->
+                        <table class="table table-data">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Letter</td>
+                                    <td>Frequency</td>
+                                    <td>Actions</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Add Data Date -->
+                <div class="col-md-12">
+                    <div class="panel panel-warning">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Data Date</div>
+                        <div class="panel-body text-center">
+                        <form>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="datepicker" class="form-control" name="search-data-date-letter" placeholder="Search date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="search-data-date-frequency" placeholder="Search frequency">
+                                </div>
+                            </div>
+                        </form>
+                            <div class="clearfix">
+                                <button onclick="showAddDataDate()" class="btn btn-md btn-warning pull-right"><span class="fa fa-plus"></span> Add data date</button>
+                            </div>
+                            <!-- Message -->
+                            <div id="data-date-message">
+                                
+                            </div>
+                            <!-- Hidden Add Data Date Form -->
+                            <div id="add-data-date">
+                                <hr>
+                                <form action="">
+                                    <div class="row">
+                                        <div class="form-group col-md-5">
+                                            <input type="text" id="datepicker2" class="form-control" name="data-date-letter" placeholder="Search date">
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <input type="input" placeholder="Enter frequency" name="data-date-frequency" class="form-control">
+                                        </div>
+                                        <button id="add-data-date-button" onclick="addDataDate()" class="btn btn-warning col-md-2">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Table -->
+                        <table class="table table-data-date">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Letter</td>
+                                    <td>Frequency</td>
+                                    <td>Actions</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

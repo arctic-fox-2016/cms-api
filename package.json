@@ -1,0 +1,36 @@
+{
+  "name": "cms-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "express-ejs-layouts": "^2.2.0",
+    "express-session": "^1.14.1",
+    "method-override": "^2.3.6",
+    "mongoose": "^4.6.5",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arctic-fox-2016/cms-api.git"
+  },
+  "author": "tevin <tevinsa@yahoo.com> (www.github.com/tevinstein)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arctic-fox-2016/cms-api/issues"
+  },
+  "homepage": "https://github.com/arctic-fox-2016/cms-api#readme"
+}
