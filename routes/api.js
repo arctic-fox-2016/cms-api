@@ -1,7 +1,19 @@
 var express = require('express')
 var router = express.Router()
 var data = require('../models/data')
+var datadate = require('../models/datadate')
     /* GET users listing. */
+
+    router.get('/datadate', function(req, res, next) {
+        datadate.find({}, function(err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                    res.json(result)
+            }
+        })
+    })
+
 router.put('/data/:id', function(req, res, next) {
     data.findByIdAndUpdate(req.params.id, {
         $set: {

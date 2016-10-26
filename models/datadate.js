@@ -12,10 +12,10 @@ let schemaOptions = {
 
 var dataDateSchema = new mongoose.Schema(
   {
-      letter: Date,
+      dateletter: Date,
       frequency: Number,
     },schemaOptions
 )
 
-let DataDate = mongoose.model('data', dataDateSchema)
+let DataDate = mongoose.model('datadate', dataDateSchema)
 module.exports = DataDate

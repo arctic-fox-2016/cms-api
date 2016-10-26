@@ -63,7 +63,7 @@ router.post('/register', function(req, res, next) {
       newuser.save(function(err) {
         req.logIn(user, function(err) {
           console.log('ok');
-          res.redirect('/home');
+          return res.json({redirect:'/home'})
         })
       })
     })

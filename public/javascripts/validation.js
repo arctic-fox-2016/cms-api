@@ -1,6 +1,5 @@
 $(function() {
-    $( "#letter" ).datepicker()
-    $( "#letter" ).datepicker( "setDate", new Date() );
+    
     $('#login-form-link').click(function(e) {
 		$("#login-form").delay(100).fadeIn(100);
  		$("#register-form").fadeOut(100);
@@ -25,13 +24,14 @@ $(function() {
       data: {email: $('#email-register').val(), password: $('#password-register').val()},
       dataType: 'json'
     })
-    // .done(function(result){
-    //   console.log(result)
-    //   result.forEach(function(item){
-    //     insert_to_tabel(item)
-    //   })
-    // })
-    // e.preventDefault();
+    .done(function(data,textstatus){
+      if (data.redirect) {
+           window.location.href = data.redirect;
+       }
+       else {
+           console.log(textstatus);
+       }
+    })
   })
 
   $('#login-submit').click(function (e) {
@@ -44,13 +44,10 @@ $(function() {
     })
     .done(function(data,textstatus){
       if (data.redirect) {
-           // data.redirect contains the string URL to redirect to
            window.location.href = data.redirect;
        }
        else {
-           // data.form contains the HTML for the replacement form
            console.log(textstatus);
-          //  $("#myform").replaceWith(data.form);
        }
     })
 
