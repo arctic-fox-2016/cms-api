@@ -13,6 +13,15 @@ var datadate = require('../models/datadate')
             }
         })
     })
+    router.get('/data', function(req, res, next) {
+        data.find({}, function(err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                    res.json(result)
+            }
+        })
+    })
     router.post('/datesearch', function(req, res, next) {
       if(req.body.letter != "" && req.body.frequency != ""){
         console.log('go 1',req.body.letter,req.body.frequency)

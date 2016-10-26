@@ -1,6 +1,15 @@
 $(function() {
     var id_edit
-
+    $.ajax({
+            type: 'GET',
+            url: '/api/data',
+            dataType: 'json'
+        })
+        .done(function(result) {
+          result.forEach(function (item) {
+                insert_to_tabel(item)
+          })
+        })
 
     function insert_to_tabel(item) {
         var row = $('<tr></tr>').attr({
