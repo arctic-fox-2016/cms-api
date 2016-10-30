@@ -28,6 +28,9 @@ router.get('/home',isLoggedIn, function(req, res, next) {
   res.render('home', { title: 'Express' });
 })
 
+router.get('/barchart', function(req, res, next) {
+  res.render('barchart', { title: 'Barchart With D3Js' });
+})
 
 router.post('/login',function(req, res, next) {
   passport.authenticate('local-login', function(err, user, info) {

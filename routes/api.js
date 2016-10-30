@@ -22,6 +22,52 @@ var datadate = require('../models/datadate')
             }
         })
     })
+    router.post('/datasearch', function(req, res, next) {
+      if(req.body.letter != "" && req.body.frequency != ""){
+        console.log('go 1',req.body.letter,req.body.frequency)
+        datadate.find({
+          $and: [{letter: {$in:req.body.letter}}, {frequency: {$in:req.body.frequency}}]
+
+        }, function(err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                    res.json(result)
+            }
+        })
+      } else if(req.body.letter != "" && req.body.frequency === ""){
+        console.log('go 2',req.body.letter)
+        datadate.find({
+          letter: {$in:req.body.letter}
+        }, function(err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                    res.json(result)
+            }
+        })
+      } else if(req.body.letter === "" && req.body.frequency != ""){
+        console.log('go 3',req.body.frequency)
+        datadate.find({
+          frequency: {$in:req.body.frequency}
+        }, function(err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                    res.json(result)
+            }
+        })
+      } else if(req.body.letter === "" && req.body.frequency === ""){
+        console.log('go 4')
+        datadate.find({}, function(err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                    res.json(result)
+            }
+        })
+      }
+    })
     router.post('/datesearch', function(req, res, next) {
       if(req.body.letter != "" && req.body.frequency != ""){
         console.log('go 1',req.body.letter,req.body.frequency)

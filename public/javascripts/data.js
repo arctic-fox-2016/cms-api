@@ -68,3 +68,45 @@ function delete_data(itemid) {
             $(`#${itemid}`).remove()
     })
 }
+$( "#lettersearch" ).keyup(function() {
+
+  $.ajax({
+          type: 'POST',
+          url: '/api/datesearch',
+          data: {
+              letter: $('#lettersearch').val(),
+              frequency: $('#frequencysearch').val()
+          },
+          dataType: 'json'
+      })
+      .done(function(result) {
+        if(result){
+          $('tr').remove()
+          result.forEach(function (item) {
+                insert_to_tabel(item)
+          })
+        }
+
+      })
+
+})
+$( "#frequencysearch" ).keyup(function() {
+  $.ajax({
+          type: 'POST',
+          url: '/api/datesearch',
+          data: {
+              letter: $('#lettersearch').val(),
+              frequency: $('#frequencysearch').val()
+          },
+          dataType: 'json'
+      })
+      .done(function(result) {
+        if(result){
+          $('tr').remove()
+          result.forEach(function (item) {
+                insert_to_tabel(item)
+          })
+        }
+
+      })
+})
