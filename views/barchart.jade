@@ -52,7 +52,7 @@ block content
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    $.getJSON( "http://localhost:3000/api/data", function(data) {
+    $.getJSON( "/api/data", function(data) {
     console.log(data);
     data.map((obj)=>{
       var color_arr = "01234456789abcdef"
